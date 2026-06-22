@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+const path = require('path');
 
 const barangRoutes = require('./routes/barangRoutes');
 
@@ -16,6 +17,9 @@ app.use(express.static('public')); // <-- KODE BARU, pemanggil web HTML
 app.use('/api', barangRoutes);
 
 // Jalankan Server
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 app.listen(PORT, () => {
     console.log(`Server berjalan di http://localhost:${PORT}`);
 });
